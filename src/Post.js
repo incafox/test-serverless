@@ -10,8 +10,8 @@ module.exports = {
   /** Create(save) selected people(star war character)*/
   async save(event) {
     const body = JSON.parse(event.body);
-    if (!body.name && !body.url && !body.species) {
-      return Util.envelop("Data no valida", 422);
+    if (isNaN(body.name) || !body.url) {
+      return Util.envelop("Data no valida", 400);
     }
     var temp = new Character(body);
     var id = { id: uuidv4() };

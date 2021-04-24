@@ -21,7 +21,7 @@ Inicia DynamoDB emulador offline. Usa api calls con url base: `http://localhost:
   http://localhost:3000/api/people/page/4
 ```
 
-2. Escoje un personaje y guardalo en dynamo (no permite guardar repetidos) enviandolo a :  [POST]
+2. Escoje un personaje y guardalo en dynamo (no permite guardar repetidos y la data debe de incluir url de origin de manera obligatoria) enviandolo a :  [POST]
 
 ```
   http://localhost:3000/api/save
