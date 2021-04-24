@@ -1,0 +1,5 @@
+-R spec
+--ui bdd
+--bail
+--timeout 30000
+--reporter test/mocha-axios-reporter.js

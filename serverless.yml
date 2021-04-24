@@ -1,0 +1,88 @@
+service: test-lambdas
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: sa-east-1
+  profile: serverless-admin
+  environment:
+    DYNAMODB_NAMESPACE: ${opt:stage, "dev"}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/*"
+
+package:
+  exclude:
+    - test/**
+    - coverage/**
+    - lambda-node-logo.png
+    - .nyc_output/**
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-aws-documentation
+
+functions:
+  ## POST API
+  saveCharacter:
+    handler: src/Post.save
+    events:
+      - http:
+          method: POST
+          path: /api/save
+          cors: true
+  ## GET BLOCK
+  getSavedCharacters:
+    handler: src/Get.getSavedPeople
+    events:
+      - http:
+          method: GET
+          path: /api/people/saved
+          cors: true
+
+  getAvailableCharacters:
+    handler: src/Get.getAvailablePeople
+    events:
+      - http:
+          method: GET
+          path: /api/people/page/{page}
+          cors: true
+
+  ## Utils 
+  ping:
+    handler: src/Util.ping
+    events:
+      - http:
+          method: GET
+          path: /api/ping
+          cors: true
+  purgeData:
+    handler: src/Util.purgeData
+    events:
+      - http: DELETE /api/__TESTUTILS__/purge
+resources:
+  Resources:
+    CommentsDynamoDBTable:
+      Type: "AWS::DynamoDB::Table"
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: url
+            AttributeType: S
+        KeySchema:
+          - 
+            AttributeName: url
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: realworld-${self:provider.environment.DYNAMODB_NAMESPACE}-people
