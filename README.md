@@ -93,7 +93,8 @@ Inicia DynamoDB emulador offline. Usa api calls con url base: `http://localhost:
         "genero": "male",
         "id": "2c1e6906-01ee-46f2-94eb-a0d2d8c2683a",
         "mundo_origen": "https://swapi.py4e.com/api/planets/28/"
-      }
+      },
+      ...
     ],
     "Count": 1,
     "ScannedCount": 1
