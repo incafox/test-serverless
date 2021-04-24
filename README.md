@@ -15,14 +15,13 @@ npm run start
 
 Inicia DynamoDB emulador offline. Usa api calls con url base: `http://localhost:3000/api` asi:
 
-1. Consulta personajes por paginacion:  [GET]
-
+1. Consulta personajes disponibles en swapi por paginacion:  [GET]
 
 ```
   http://localhost:3000/api/people/page/4
-
 ```
-2. Escoje un personaje y guardalo (no permite guardar repetidos) enviandolo a :  [POST]
+
+2. Escoje un personaje y guardalo en dynamo (no permite guardar repetidos) enviandolo a :  [POST]
 
 ```
   http://localhost:3000/api/save
@@ -61,8 +60,8 @@ Inicia DynamoDB emulador offline. Usa api calls con url base: `http://localhost:
 
 ```
   http://localhost:3000/api/people/saved/
-
 ```
+
   response:
 
 ```
