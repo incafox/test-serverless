@@ -105,7 +105,6 @@ Inicia DynamoDB emulador offline. Usa api calls con url base: `http://localhost:
 
 
 
-```
 ## Test local
 ```
 npm test
