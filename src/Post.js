@@ -11,7 +11,7 @@ module.exports = {
   async save(event) {
     const body = JSON.parse(event.body);
     if (isNaN(body.name) || !body.url) {
-      return Util.envelop("Data no valida", 400);
+      return Util.envelop("Data no valida", 422);
     }
     var temp = new Character(body);
     var id = { id: uuidv4() };
