@@ -25,7 +25,7 @@ Inicia DynamoDB emulador offline. Usa api calls con url base: `http://localhost:
 2. Escoje un personaje y guardalo enviandolo a:  [POST]
 
 ```
-  http://localhost:3000/api/characters
+  http://localhost:3000/api/save
 
 ```
   body: {
